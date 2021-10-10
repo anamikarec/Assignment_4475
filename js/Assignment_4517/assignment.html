@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@300&display=swap" rel="stylesheet">
+<style>
+  * {
+    font-family: 'Noto Sans Mono', monospace;
+  }
+</style>
+
+</head>
+  <body>
+    <script type="text/javascript">
+      const post = {
+        id: "001",
+        author: "albert",
+        body: "Whats the status?",
+        timestamp: "Sun Aug 02 2020 18:08:45 GMT+0530",
+        points: "2",
+        replies: [
+          {
+            id: "003",
+            author: "haren",
+            body: "Wrote the test suites, waiting for approval?",
+            timestamp: "Sun Aug 02 2020 18:12:45 GMT+0530",
+            points: "3",
+            replies: [
+              {
+                id: "004",
+                author: "albert",
+                body: "Thanks for the update!",
+                timestamp: "Sun Aug 02 2020 18:15:45 GMT+0530",
+                points: "8",
+              },
+            ],
+          },
+          {
+            id: "002",
+            author: "Nrupul",
+            body: "looking forward for the demo!",
+            timestamp: "Sun Aug 02 2020 18:10:45 GMT+0530",
+            points: "2",
+            replies: []
+          },
+        ],
+      };
+
+      function createComment(reply, parent) 
+      {
+        for (var c in reply)  
+        {
+          const date = new Date();
+          const minutes = date.getMinutes();
+          const li = document.createElement("li");
+          const div = document.createElement("h4");
+          div.innerHTML = `${reply[c].author} ${reply[c].points} points ${minutes} minutes ago`
+          div.style.color = "#4c5050";
+          const giveRelpybtn = document.createElement("h4");
+          giveRelpybtn.innerHTML = "Reply Give Award Share Report Save";
+          giveRelpybtn.style.color = "grey";
+          div.style.fontSize = "12px"
+          li.textContent = `${reply[c].body}`;
+          li.style.fontWeight = "400";
+          li.style.fontSize = "20px"
+          const ul = document.createElement("ul");
+          ul.style.listStyleType = "none";
+          createComment(reply[c].replies,ul);
+          parent.append(div, li,giveRelpybtn, ul);
+        }
+      }
+
+      function createPost(post) {
+        const date = new Date();
+        const minutes = date.getMinutes();
+        const mainCont = document.createElement("div");
+        const body = document.createElement("h4");
+        const author = document.createElement("div");
+
+        const giveRelpybtn = document.createElement("h4");
+        giveRelpybtn.innerHTML = "Reply Give Award Share Report Save";
+        giveRelpybtn.style.color = "grey";
+
+        body.textContent = post.body;
+        body.style.fontWeight = "600";
+        
+        author.textContent = `${post.author} ${post.points} points ${minutes} minutes ago`;
+        author.style.fontSize = "12px"
+        const commentsContainer = document.createElement("ul");
+        commentsContainer.style.listStyleType = "none"; 
+        
+        createComment(post.replies, commentsContainer);
+        
+        mainCont.append(author,body,giveRelpybtn, commentsContainer);
+        mainCont.style.backgroundColor = "#Ebecec";
+        mainCont.style.padding = "20px";
+        mainCont.style.marginLeft = "25%";
+        mainCont.style.width = "50%";
+        mainCont.style.borderRadius = "20px";
+
+        return mainCont;
+      }
+
+      const tree = createPost(post);
+      document.body.append(tree);
+    </script>
+  </body>
+</html>
