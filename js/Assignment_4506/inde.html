@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Details Card</title>
+    <style type="text/css">
+      .cl {
+        height: 40px;
+        width: 400px;
+        font-size: 24px;
+        margin: 10px;
+        border: 1px solid black;
+        border-radius: 10px;
+        text-align: center;
+      }
+      body{
+          width: 500px;
+          margin-left: 30%;
+          background-color:cornsilk;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1> Creating User Card : </h1>
+
+    <input
+      class="cl"
+      type="text"
+      name="name"
+      id="name"
+      placeholder="Enter your username"
+    /><br />
+    <input
+      class="cl"
+      type="number"
+      name="number"
+      id="number"
+      placeholder="Enter your mobile number"
+    /><br />
+    <button class="cl" id="btn">Create User Card</button>
+    <div id="result">
+
+    </div>
+    
+  </body>
+
+  <script type="text/javascript">
+
+   var flag = 0;
+
+    const btn = document.getElementById("btn");
+    btn.addEventListener("click", () => {
+      const result = document.getElementById("result");
+      result.innerHTML = "";
+      result.style.border = "10px solid black";
+      result.style.backgroundColor = "pink";
+      result.style.padding = "10px";
+      result.style.borderRadius = "10px";
+      result.style.fontSize = "24px"
+      result.style.height = "150px";
+      result.style.margin = "10px";
+      const name = document.getElementById("name").value;
+      const userName = document.createElement("p");
+      userName.textContent = `Username : `+name;
+
+      const showBtn = document.createElement("button");
+      showBtn.id = "btn2";
+      showBtn.textContent = "Show mobile number";
+      showBtn.style.fontSize = "24px";
+      showBtn.style.padding = "5px";
+      showBtn.style.backgroundColor = "pink";
+      showBtn.style.border = "1px solid pink";
+      var a =1;
+      showBtn.addEventListener("click",()=>{
+        if(a===1){
+            const mob = document.getElementById("number").value;
+            var showBtn = document.getElementById("btn2");
+            showBtn.textContent = `Mob : `+mob +  `=> Click to Hide`;
+            showBtn.style.display="inline";
+            return a = 0;
+         }
+         else
+         {
+            const mob = document.getElementById("number").value;
+            const number = document.createElement("p");
+            number.textContent = mob;
+            var showBtn = document.getElementById("btn2");
+            showBtn.appendChild(number);
+            showBtn.textContent="";
+            showBtn.textContent="Show mobile number";
+            return a = 1;
+         }
+      });
+      result.append(userName, showBtn);
+    });
+
+  </script>
+</html>
